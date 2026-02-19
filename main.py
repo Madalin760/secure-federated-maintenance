@@ -7,14 +7,14 @@ import matplotlib.pyplot as plt
 
 def generate_factory_data(samples=1000, noise_level=0.1):
     """
-    Simulăm date de senzori: 
-    X = [Temperatura, Vibrații]
+    Simulam date de senzori: 
+    X = [Temperatura, Vibratii]
     y = [Status Motor] (0 = OK, 1 = Defect Iminent)
     """
     # Temperatura normala ~60 grade, Vibratii ~0.5
     X = np.random.rand(samples, 2) 
     
-    # Regula a naturii (pe care AI-ul trebuie sa o invețe):
+    # Regula a naturii (pe care AI-ul trebuie sa o invete):
     # Daca (Temp > 0.8) SAU (Vibratii > 0.8) => Defect (1)
     y = ((X[:, 0] > 0.8) | (X[:, 1] > 0.8)).astype(int)
     
@@ -44,7 +44,7 @@ def create_model():
 
 def add_privacy_noise(weights, noise_scale=0.01):
     """
-    Adaugă zgomot aleatoriu peste parametrii modelului.
+    Adauga zgomot aleatoriu peste parametrii modelului.
     Asta previne "reverse engineering" al datelor originale.
     """
     noisy_weights = []
@@ -85,7 +85,7 @@ for round_num in range(1, 6):
     weights_A = model_A.get_weights()
     weights_B = model_B.get_weights()
     
-    # d) Aplicăm PRIVACY (Criptare prin zgomot)
+    # d) Aplicam PRIVACY (Criptare prin zgomot)
     # Inainte sa trimita la server, fabricile "murdaresc" putin datele matematice
     secure_weights_A = add_privacy_noise(weights_A, noise_scale=0.005)
     secure_weights_B = add_privacy_noise(weights_B, noise_scale=0.005)
